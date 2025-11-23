@@ -1,0 +1,45 @@
+# Configuration for News Recommendation System
+
+# Data settings
+data:
+  interactions_file: "data/interactions.csv"
+  items_file: "data/items.csv"
+  users_file: "data/users.csv"
+  test_size: 0.2
+  val_size: 0.1
+  random_seed: 42
+
+# Model settings
+models:
+  tfidf:
+    max_features: 10000
+    ngram_range: [1, 2]
+    min_df: 2
+    max_df: 0.95
+    
+  sbert:
+    model_name: "all-MiniLM-L6-v2"
+    batch_size: 32
+    
+  hybrid:
+    tfidf_weight: 0.6
+    sbert_weight: 0.4
+
+# Evaluation settings
+evaluation:
+  metrics: ["precision", "recall", "map", "ndcg", "hit_rate"]
+  k_values: [5, 10, 20]
+  n_recommendations: 10
+
+# Training settings
+training:
+  batch_size: 64
+  epochs: 10
+  learning_rate: 0.001
+  early_stopping_patience: 3
+
+# Demo settings
+demo:
+  port: 8501
+  max_recommendations: 10
+  show_explanations: true
